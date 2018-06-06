@@ -1,6 +1,6 @@
 # millenuxt
 
-> tutorial
+Installation, basic use, and API request with Axios
 
 ## Build Setup
 
