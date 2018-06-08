@@ -20,15 +20,14 @@
 
 <script>
   import AppLogo from '~/components/AppLogo.vue'
-  import axios from '~/plugins/axios'
+  import {mapState} from 'vuex'
   export default{
     components: {
       AppLogo
     },
-    asyncData(){
-        return axios.get('pokemon').then(res=>({
-         pokemons : res.data.results
-        }))
-    }
+    computed: mapState([
+      'pokemons'
+      ])
   }
+  
 </script>
