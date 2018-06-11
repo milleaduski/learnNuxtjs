@@ -11,7 +11,7 @@
       Items
     },
     async fetch({store}){
-      await store.dispatch('load_items', 'pokemon')
+      await store.dispatch('load_items', 'location')
     }
   }
   

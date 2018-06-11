@@ -2,17 +2,17 @@
 // Modules  mode
 import axios from '~/plugins/axios'
 export const state = () => ({
-	pokemons : []
+	items : []
 });
 export const mutations = {
-	setPokemons(state, items){
-		state.pokemons = items
+	setItems(state, items){
+		state.items = items
 	}
 }
 export const actions = {
-	async nuxtServerInit ({commit}){
-		const {data} = await axios.get('pokemon')
-		commit('setPokemons', data.results)
+	async load_items ({commit}, url){
+		const {data} = await axios.get(url)
+		commit('setItems', data.results)
 	}
 }
 
