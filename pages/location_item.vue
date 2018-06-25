@@ -1,6 +1,6 @@
 <template>
   <div>
-    <items></items>
+    <items :data="'Location'"></items>
   </div>
 </template>
 

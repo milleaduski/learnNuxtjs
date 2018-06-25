@@ -12,7 +12,8 @@ export const mutations = {
 export const actions = {
 	async load_items ({commit}, url){
 		const {data} = await axios.get(url)
-		commit('setItems', data.results)
+		console.log(data)
+		commit('setItems', data)
 	}
 }
 
