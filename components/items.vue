@@ -14,7 +14,6 @@
           Data {{data}} from Props
         </a>
          <nuxt-link tag="a" v-for="item in items.results" class="list-group-item list-group-item-action" :key="item.name" :to="'/'+data+'/'+item.name">{{item.name}}</nuxt-link>
-        <!-- <a v-for="item in items.results" :key="item.name" href="#" class="list-group-item list-group-item-action">{{item.name}}</a> -->
     </div>
   </section>
 </template>
