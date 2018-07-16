@@ -1,21 +1,36 @@
 
-// Modules  mode
 import axios from '~/plugins/axios'
 export const state = () => ({
-	items : []
+	countries : []
 });
 export const mutations = {
-	setItems(state, items){
-		state.items = items
+	setData(state, items){
+		state.countries = items
 	}
 }
 export const actions = {
-	async load_items ({commit}, url){
-		const {data} = await axios.get(url)
-		console.log(data)
-		commit('setItems', data)
+	async nuxtServerInit ({commit}){
+		const res = await axios.get('country');
+		commit('setData', res.data)
 	}
 }
+
+// Modules  mode
+// import axios from '~/plugins/axios'
+// export const state = () => ({
+// 	items : []
+// });
+// export const mutations = {
+// 	setItems(state, items){
+// 		state.items = items
+// 	}
+// }
+// export const actions = {
+// 	async load_items ({commit}, url){
+// 		const {data} = await axios.get(url)
+// 		commit('setItems', data)
+// 	}
+// }
 
 // Clasicc Mode
 // import axios from '~/plugins/axios'
