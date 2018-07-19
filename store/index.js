@@ -6,12 +6,19 @@ export const state = () => ({
 export const mutations = {
 	setData(state, items){
 		state.countries = items
+	},
+	addData(state, item){
+		state.countries.push(item);
 	}
 }
 export const actions = {
 	async nuxtServerInit ({commit}){
 		const res = await axios.get('country');
 		commit('setData', res.data)
+	},
+	async add ({commit}, data){
+		const res = await axios.post('country',{name:data.country, city:data.city});
+		commit('addData', res.data)
 	}
 }
 
