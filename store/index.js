@@ -9,6 +9,10 @@ export const mutations = {
 	},
 	addData(state, item){
 		state.countries.push(item);
+	},
+	deleted(state, id){
+		const target = state.countries.findIndex(p=> p.id === id)
+		state.countries.splice(target, 1)
 	}
 }
 export const actions = {
@@ -16,9 +20,13 @@ export const actions = {
 		const res = await axios.get('country');
 		commit('setData', res.data)
 	},
-	async add ({commit}, data){
+	async added ({commit}, data){
 		const res = await axios.post('country',{name:data.country, city:data.city});
 		commit('addData', res.data)
+	},
+	async deleteData ({commit}, id){
+		const res = await axios.delete('country/'+id);
+		commit('deleted', id)
 	}
 }
 
@@ -62,4 +70,4 @@ export const actions = {
 //   })
 // }
 
-// export default pokeStore
+
