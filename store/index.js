@@ -13,6 +13,11 @@ export const mutations = {
 	deleted(state, id){
 		const target = state.countries.findIndex(p=> p.id === id)
 		state.countries.splice(target, 1)
+	},
+	updateChange(state, data){
+		const target = state.countries.find(p=> p.id === data.id)
+		target.name = data.name
+		target.city = data.city
 	}
 }
 export const actions = {
@@ -27,6 +32,10 @@ export const actions = {
 	async deleteData ({commit}, id){
 		const res = await axios.delete('country/'+id);
 		commit('deleted', id)
+	},
+	async updateData ({commit}, data){
+		const res = await axios.put('country/'+data.id, {name: data.name, city:data.city});
+		commit('updateChange',data)
 	}
 }
 

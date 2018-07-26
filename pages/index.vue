@@ -20,10 +20,11 @@
                   <input type="text" class="form-control" id="country" placeholder="Country" v-model="formData.country">
                 </div>
                 <div class="form-group">
-                  <label for="city">Password</label>
+                  <label for="city">City</label>
                   <input type="text" class="form-control" id="city" placeholder="City" v-model="formData.city">
                 </div>
-                <button @click.prevent="add(formData)" class="btn btn-primary">Submit</button>
+                <button v-if="toggleBtn" @click.prevent="add(formData)" class="btn btn-primary">Submit</button>
+                <button v-else @click.prevent="doUpdate()" class="btn btn-warning">Update</button>
               </form>
             </div>
             <div class="col-sm-6">
@@ -31,6 +32,7 @@
                 <div class="alert alert-primary" role="alert" v-for="item in countries" :key="item.id">
                  <p>Country : {{item.name}}</p> 
                  <p>Capital City: {{item.city}}</p>
+                 <button class="btn btn-warning" style="margin-right: 10px;" @click="editData(item)" >Edit</button>
                  <button class="btn btn-danger" @click="doDelete(item.id)" >Delete</button>
                 </div>  
             </div>
@@ -49,8 +51,10 @@
       return{
         formData:{
           country:'',
-          city:''
-        }
+          city:'',
+          id:''
+        },
+        toggleBtn: true
       }
     },
     computed: mapState([
@@ -63,6 +67,23 @@
       },
       doDelete(id){
        this.$store.dispatch('deleteData',id);
+      },
+      editData(item){
+        this.toggleBtn = false
+        this.formData.country = item.name
+        this.formData.city = item.city
+        this.formData.id = item.id
+      },
+      doUpdate(){
+        this.$store.dispatch('updateData',
+        {
+          id: this.formData.id,
+          name: this.formData.country,
+          city: this.formData.city
+        })
+        this.formData.country = ''
+        this.formData.id = ''
+        this.formData.city = ''
       }
     }
   }

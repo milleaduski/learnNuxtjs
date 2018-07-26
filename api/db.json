@@ -12,8 +12,13 @@
     },
     {
       "name": "Germany",
-      "city": "Berlim",
+      "city": "Berlin",
       "id": 13
+    },
+    {
+      "name": "South Korea",
+      "city": "Seoul",
+      "id": 14
     }
   ]
 }
