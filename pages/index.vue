@@ -29,7 +29,10 @@
             </div>
             <div class="col-sm-6">
               <h3>List Of Countries</h3>
-                <div class="alert alert-primary" role="alert" v-for="item in countries" :key="item.id">
+               <div class="form-group">
+                  <input type="text" class="form-control" id="search" placeholder="Search Country" v-model="searchKey">
+                </div>
+                <div class="alert alert-primary" role="alert" v-for="item in searchCountries" :key="item.id">
                  <p>Country : {{item.name}}</p> 
                  <p>Capital City: {{item.city}}</p>
                  <button class="btn btn-warning" style="margin-right: 10px;" @click="editData(item)" >Edit</button>
@@ -54,12 +57,18 @@
           city:'',
           id:''
         },
-        toggleBtn: true
+        toggleBtn: true,
+        itemCountries: this.$store.state.countries,
+        searchKey:''
       }
     },
-    computed: mapState([
-      'countries'
-    ]),
+    computed:{
+      searchCountries(){
+        return this.itemCountries.filter(country => 
+          country.name.toLowerCase().indexOf(this.searchKey.toLowerCase()) !== -1 || country.city.toLowerCase().indexOf(this.searchKey.toLowerCase()) !== -1
+        )
+      }
+    },
     methods:{
       // ...mapActions({add : 'added'})
       add (formData){
@@ -88,3 +97,5 @@
     }
   }
 </script>
+
+<!--  -->
